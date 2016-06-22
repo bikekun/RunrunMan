@@ -5,6 +5,8 @@
 
 ARunrunManCharacter::ARunrunManCharacter()
 {
+	//Event tick
+	PrimaryActorTick.bCanEverTick = true;
 	// Set size for collision capsule
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
 
@@ -39,6 +41,9 @@ ARunrunManCharacter::ARunrunManCharacter()
 
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named MyCharacter (to avoid direct content references in C++)
+
+	//Вектор направления движения
+	VRightVectorMoved = FVector(0.f, -1.f, 0.f);
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -47,18 +52,21 @@ ARunrunManCharacter::ARunrunManCharacter()
 void ARunrunManCharacter::SetupPlayerInputComponent(class UInputComponent* InputComponent)
 {
 	// set up gameplay key bindings
+	// отключить, в этом характере не должно быть
 	InputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
 	InputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
-	InputComponent->BindAxis("MoveRight", this, &ARunrunManCharacter::MoveRight);
+	//InputComponent->BindAxis("MoveRight", this, &ARunrunManCharacter::MoveRight);
 
 	InputComponent->BindTouch(IE_Pressed, this, &ARunrunManCharacter::TouchStarted);
 	InputComponent->BindTouch(IE_Released, this, &ARunrunManCharacter::TouchStopped);
-}
 
+	
+}
+// Движение вперед
 void ARunrunManCharacter::MoveRight(float Value)
 {
 	// add movement in that direction
-	AddMovementInput(FVector(0.f,-1.f,0.f), Value);
+	AddMovementInput(VRightVectorMoved, Value);
 }
 
 void ARunrunManCharacter::TouchStarted(const ETouchIndex::Type FingerIndex, const FVector Location)
@@ -70,5 +78,14 @@ void ARunrunManCharacter::TouchStarted(const ETouchIndex::Type FingerIndex, cons
 void ARunrunManCharacter::TouchStopped(const ETouchIndex::Type FingerIndex, const FVector Location)
 {
 	StopJumping();
+}
+
+// Called every frame
+void ARunrunManCharacter::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+
+	//Заменить 1 на скорость движения с учетом тика
+	MoveRight(1);
 }
 

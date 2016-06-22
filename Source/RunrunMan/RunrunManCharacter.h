@@ -18,6 +18,13 @@ class ARunrunManCharacter : public ACharacter
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	class USpringArmComponent* CameraBoom;
 
+	/** Вектор направления движения*/
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = RightVector, meta = (AllowPrivateAccess = "true"))
+	FVector VRightVectorMoved;
+
+	// Called every frame
+	virtual void Tick(float DeltaSeconds) override;
+
 protected:
 
 	/** Called for side to side input */
