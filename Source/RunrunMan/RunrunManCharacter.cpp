@@ -54,12 +54,16 @@ ARunrunManCharacter::ARunrunManCharacter()
 
 void ARunrunManCharacter::SetupPlayerInputComponent(class UInputComponent* InputComponent)
 {
-	// set up gameplay key bindings
-	// отключить, в этом характере не должно быть
-	InputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
-	InputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
-	//InputComponent->BindAxis("MoveRight", this, &ARunrunManCharacter::MoveRight);
-	
+	{
+		// set up gameplay key bindings
+		/***********************************************************************/
+		// отключить, в этом характере не должно быть
+		InputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
+		InputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
+		//InputComponent->BindAxis("MoveRight", this, &ARunrunManCharacter::MoveRight);
+		/***************************************************************************/
+	}
+
 	//Выставляет направление движения по умолчанию
 	InputComponent->BindAction("StartRun", IE_Pressed, this, &ARunrunManCharacter::SetDefaultRightVector);
 	//тестовая функция для разворота персонажа (отключить)
@@ -79,8 +83,7 @@ void ARunrunManCharacter::MoveRight(float Value)
 }
 
 void ARunrunManCharacter::TouchStarted(const ETouchIndex::Type FingerIndex, const FVector Location)
-{
-	
+{	
 	// jump on any touch
 	Jump();
 }

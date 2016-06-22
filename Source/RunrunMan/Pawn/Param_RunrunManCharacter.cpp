@@ -4,5 +4,8 @@
 #include "Param_RunrunManCharacter.h"
 
 
-
+AParam_RunrunManCharacter::AParam_RunrunManCharacter()
+{
+	ParamComponent = CreateDefaultSubobject<UParametersComponent>(TEXT("ParametersComponent"));
+}
 
