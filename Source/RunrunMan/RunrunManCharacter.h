@@ -20,13 +20,17 @@ class ARunrunManCharacter : public ACharacter
 
 	/** Вектор направления движения*/
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = RightVector, meta = (AllowPrivateAccess = "true"))
-	FVector VRightVectorMoved;
+	FVector VRightVectorMovedDefault;
+
 
 	// Called every frame
 	virtual void Tick(float DeltaSeconds) override;
 
-	/*Перключение статуса для BStartMoved*/
-	void SetStartMoved();
+	// Called when the game starts or when spawned
+	//virtual void BeginPlay() override;
+
+	
+	
 
 protected:
 
@@ -43,11 +47,17 @@ protected:
 	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
 	// End of APawn interface
 
-	//определяет старта начала движения
-	bool BStartMoved;
+	//Выставляет вектор в направление по умолчанию
+	void SetDefaultRightVector();
+	//тестовая функция для разворота персонажа (отключить)
+	void SetRevertRightVector();
 
-
+	
+private:
+	//направление движения персонажа
+	FVector VRightVectorMoved;
 public:
+
 	ARunrunManCharacter();
 
 	/** Returns SideViewCameraComponent subobject **/

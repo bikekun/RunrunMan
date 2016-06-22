@@ -43,10 +43,10 @@ ARunrunManCharacter::ARunrunManCharacter()
 	// are set in the derived blueprint asset named MyCharacter (to avoid direct content references in C++)
 
 	//Вектор направления движения
-	VRightVectorMoved = FVector(0.f, -1.f, 0.f);
+	VRightVectorMoved			=  FVector(0.f, 0.f, 0.f);
+	VRightVectorMovedDefault	= FVector(0.f, -1.f, 0.f);
 
-	//BStartMoved определяет начало движения персонажа
-	BStartMoved = false;
+	
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -59,9 +59,13 @@ void ARunrunManCharacter::SetupPlayerInputComponent(class UInputComponent* Input
 	InputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
 	InputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
 	//InputComponent->BindAxis("MoveRight", this, &ARunrunManCharacter::MoveRight);
+	
+	//Выставляет направление движения по умолчанию
+	InputComponent->BindAction("StartRun", IE_Pressed, this, &ARunrunManCharacter::SetDefaultRightVector);
+	//тестовая функция для разворота персонажа (отключить)
+	InputComponent->BindAction("RevertRightVector", IE_Pressed, this, &ARunrunManCharacter::SetRevertRightVector);
+	
 
-	//Старт
-	InputComponent->BindAction("StartRun", IE_Pressed, this, &ARunrunManCharacter::SetStartMoved);
 	InputComponent->BindTouch(IE_Pressed, this, &ARunrunManCharacter::TouchStarted);
 	InputComponent->BindTouch(IE_Released, this, &ARunrunManCharacter::TouchStopped);
 
@@ -91,25 +95,29 @@ void ARunrunManCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	GEngine->AddOnScreenDebugMessage(-1, 0, FColor::Red, FString::FromInt(BStartMoved));
-
-
-	if (BStartMoved == true)
-	{
+	//GEngine->AddOnScreenDebugMessage(-1, 0, FColor::Red, FString::FromInt(BStartMoved));
+	
 		MoveRight(1);	//Заменить 1 на скорость движения с учетом тика
-	}
+	
 }
 
-/*Перключение статуса для BStartMoved*/
-void ARunrunManCharacter::SetStartMoved()
+
+
+//void ARunrunManCharacter::BeginPlay()
+//{
+//	Super::BeginPlay();
+//	
+//	//SetDefaultRightVector();
+//
+//}
+//Выставляет вектор в направление по умолчанию
+void ARunrunManCharacter::SetDefaultRightVector()
 {
-	if (BStartMoved == false)
-	{
-		BStartMoved = true;
-	}
-	else
-	{
-		BStartMoved = false;
-	}
+	VRightVectorMoved = VRightVectorMovedDefault;
+	
 }
-
+//тестовая функция для разворота персонажа (отключить)
+void ARunrunManCharacter::SetRevertRightVector()
+{
+	VRightVectorMoved = -1 * VRightVectorMoved;
+}
