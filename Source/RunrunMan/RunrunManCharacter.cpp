@@ -44,6 +44,9 @@ ARunrunManCharacter::ARunrunManCharacter()
 
 	//Вектор направления движения
 	VRightVectorMoved = FVector(0.f, -1.f, 0.f);
+
+	//BStartMoved определяет начало движения персонажа
+	BStartMoved = false;
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -57,6 +60,8 @@ void ARunrunManCharacter::SetupPlayerInputComponent(class UInputComponent* Input
 	InputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
 	//InputComponent->BindAxis("MoveRight", this, &ARunrunManCharacter::MoveRight);
 
+	//Старт
+	InputComponent->BindAction("StartRun", IE_Pressed, this, &ARunrunManCharacter::SetStartMoved);
 	InputComponent->BindTouch(IE_Pressed, this, &ARunrunManCharacter::TouchStarted);
 	InputComponent->BindTouch(IE_Released, this, &ARunrunManCharacter::TouchStopped);
 
@@ -71,6 +76,7 @@ void ARunrunManCharacter::MoveRight(float Value)
 
 void ARunrunManCharacter::TouchStarted(const ETouchIndex::Type FingerIndex, const FVector Location)
 {
+	
 	// jump on any touch
 	Jump();
 }
@@ -85,7 +91,25 @@ void ARunrunManCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	//Заменить 1 на скорость движения с учетом тика
-	MoveRight(1);
+	GEngine->AddOnScreenDebugMessage(-1, 0, FColor::Red, FString::FromInt(BStartMoved));
+
+
+	if (BStartMoved == true)
+	{
+		MoveRight(1);	//Заменить 1 на скорость движения с учетом тика
+	}
+}
+
+/*Перключение статуса для BStartMoved*/
+void ARunrunManCharacter::SetStartMoved()
+{
+	if (BStartMoved == false)
+	{
+		BStartMoved = true;
+	}
+	else
+	{
+		BStartMoved = false;
+	}
 }
 

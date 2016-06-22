@@ -25,6 +25,9 @@ class ARunrunManCharacter : public ACharacter
 	// Called every frame
 	virtual void Tick(float DeltaSeconds) override;
 
+	/*Перключение статуса для BStartMoved*/
+	void SetStartMoved();
+
 protected:
 
 	/** Called for side to side input */
@@ -39,6 +42,9 @@ protected:
 	// APawn interface
 	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
 	// End of APawn interface
+
+	//определяет старта начала движения
+	bool BStartMoved;
 
 
 public:
