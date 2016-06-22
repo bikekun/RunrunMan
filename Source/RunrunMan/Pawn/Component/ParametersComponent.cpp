@@ -9,28 +9,78 @@ UParametersComponent::UParametersComponent()
 {
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
-	bWantsBeginPlay = true;
-	PrimaryComponentTick.bCanEverTick = true;
+	bWantsBeginPlay = false;
+	PrimaryComponentTick.bCanEverTick = false;
 
+
+	Health = DefaultMaxHealth;
+	MaxHealth = DefaultMaxHealth;
+
+	SpeedMoved = 1.0f;
+
+	LevelCharacter = 1;
 	// ...
 }
 
 
-// Called when the game starts
-void UParametersComponent::BeginPlay()
+void	UParametersComponent::ChangeHealth(float value)
 {
-	Super::BeginPlay();
+	Health += value;
+	Health = FMath::Min(Health, MaxHealth);
+	Health = FMath::Max(0, Health);
 
-	// ...
-	
+	if (!(CheckHealth() ))
+	{
+		//диспатч
+	}
 }
 
-
-// Called every frame
-void UParametersComponent::TickComponent( float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction )
+bool	UParametersComponent::CheckHealth()
 {
-	Super::TickComponent( DeltaTime, TickType, ThisTickFunction );
-
-	// ...
+	if (Health <= 0)
+	{
+		return false;
+	}
+	return true;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//// Called when the game starts
+//void UParametersComponent::BeginPlay()
+//{
+//	Super::BeginPlay();
+//
+//	// ...
+//	
+//}
+//
+//
+//// Called every frame
+//void UParametersComponent::TickComponent( float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction )
+//{
+//	Super::TickComponent( DeltaTime, TickType, ThisTickFunction );
+//
+//	// ...
+//}
 

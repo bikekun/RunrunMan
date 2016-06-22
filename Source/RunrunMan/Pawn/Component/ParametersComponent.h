@@ -15,11 +15,38 @@ public:
 	// Sets default values for this component's properties
 	UParametersComponent();
 
+	
+
+	void	ChangeHealth(float value);
+	bool	CheckHealth();
+
+	void	SetMaxHealth(float value)		{ MaxHealth = value; }
+	void	SetSpeedMoved(float value)		{ SpeedMoved = value; }
+	void	SetLevel()						{ LevelCharacter++; }
+	
+	float	GetSpeedMoved()					{ return SpeedMoved; }
+	int32	GetLevel()						{ return LevelCharacter; }
+	int32	GetHealth()						{ return Health; }
+	int32	GetMaxHealth()					{ return MaxHealth; }
+
+	int32 DefaultMaxHealth;
+
+private:
+
+	int32 Health;
+	int32 MaxHealth;
+
+	float SpeedMoved;
+
+	int32 LevelCharacter;
+
+
+
 	// Called when the game starts
-	virtual void BeginPlay() override;
+	//virtual void BeginPlay() override;
 	
 	// Called every frame
-	virtual void TickComponent( float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction ) override;
+	//virtual void TickComponent( float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction ) override;
 
 		
 	
