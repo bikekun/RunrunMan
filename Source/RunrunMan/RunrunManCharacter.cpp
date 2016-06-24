@@ -39,6 +39,10 @@ ARunrunManCharacter::ARunrunManCharacter()
 	GetCharacterMovement()->MaxWalkSpeed = 600.f;
 	GetCharacterMovement()->MaxFlySpeed = 600.f;
 
+	//инициализация параметров в компоненте ParametersComponent
+	ParametersComponent = CreateDefaultSubobject <UParametersComponent>(TEXT("Param Component"));
+	ParametersComponent->DDeath.AddUFunction(this, "Death");
+	//ParametersComponent->DDeath.AddUFunction(this, "Death");
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named MyCharacter (to avoid direct content references in C++)
 
@@ -74,6 +78,7 @@ void ARunrunManCharacter::SetupPlayerInputComponent(class UInputComponent* Input
 	InputComponent->BindTouch(IE_Released, this, &ARunrunManCharacter::TouchStopped);
 
 	
+	
 }
 // Движение вперед
 void ARunrunManCharacter::MoveRight(float Value)
@@ -86,6 +91,7 @@ void ARunrunManCharacter::TouchStarted(const ETouchIndex::Type FingerIndex, cons
 {	
 	// jump on any touch
 	Jump();
+	
 }
 
 void ARunrunManCharacter::TouchStopped(const ETouchIndex::Type FingerIndex, const FVector Location)
@@ -116,11 +122,15 @@ void ARunrunManCharacter::Tick(float DeltaTime)
 //Выставляет вектор в направление по умолчанию
 void ARunrunManCharacter::SetDefaultRightVector()
 {
-	VRightVectorMoved = VRightVectorMovedDefault;
-	
+	VRightVectorMoved = VRightVectorMovedDefault;	
 }
 //тестовая функция для разворота персонажа (отключить)
 void ARunrunManCharacter::SetRevertRightVector()
 {
 	VRightVectorMoved = -1 * VRightVectorMoved;
+}
+
+void ARunrunManCharacter::Death()
+{
+	GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Blue, TEXT("Death"), true);
 }

@@ -5,6 +5,7 @@
 #include "Components/ActorComponent.h"
 #include "ParametersComponent.generated.h"
 
+DECLARE_MULTICAST_DELEGATE(DelegeteDeath);
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class RUNRUNMAN_API UParametersComponent : public UActorComponent
@@ -29,7 +30,11 @@ public:
 	int32	GetHealth()						{ return Health; }
 	int32	GetMaxHealth()					{ return MaxHealth; }
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = ParametersComponent)
 	int32 DefaultMaxHealth;
+
+	//диспатч на смерть
+	DelegeteDeath DDeath;
 
 private:
 

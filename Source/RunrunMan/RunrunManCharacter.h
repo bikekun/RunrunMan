@@ -2,6 +2,7 @@
 #pragma once
 #include "GameFramework/Character.h"
 #include "Engine.h"
+#include "Pawn/Component/ParametersComponent.h"
 #include "RunrunManCharacter.generated.h"
 
 
@@ -22,13 +23,19 @@ class ARunrunManCharacter : public ACharacter
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = RightVector, meta = (AllowPrivateAccess = "true"))
 	FVector VRightVectorMovedDefault;
 
+	UFUNCTION(Category = ParametersComponent)
+	void Death();
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = ParametersComponent, meta = (AllowPrivateAccess = "true"))
+	UParametersComponent *ParametersComponent;
+
 
 	// Called every frame
 	virtual void Tick(float DeltaSeconds) override;
 
 	// Called when the game starts or when spawned
 	//virtual void BeginPlay() override;
-
+	
 	
 	
 

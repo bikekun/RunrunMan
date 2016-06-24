@@ -13,6 +13,7 @@ UParametersComponent::UParametersComponent()
 	PrimaryComponentTick.bCanEverTick = false;
 
 
+	DefaultMaxHealth = 100;
 	Health = DefaultMaxHealth;
 	MaxHealth = DefaultMaxHealth;
 
@@ -29,9 +30,10 @@ void	UParametersComponent::ChangeHealth(float value)
 	Health = FMath::Min(Health, MaxHealth);
 	Health = FMath::Max(0, Health);
 
-	if (!(CheckHealth() ))
+	if (!(CheckHealth()))
 	{
 		//диспатч
+		DDeath.Broadcast();
 	}
 }
 
