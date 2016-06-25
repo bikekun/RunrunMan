@@ -20,6 +20,8 @@ public:
 	// Called every frame
 	virtual void Tick( float DeltaSeconds ) override;
 
-	
+	void GenerateMatrixMap();
+	int32 ArrayMap[10][10];
+
 	
 };
