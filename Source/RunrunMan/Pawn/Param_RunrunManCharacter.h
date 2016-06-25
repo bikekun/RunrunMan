@@ -3,6 +3,7 @@
 #pragma once
 
 #include "RunrunManCharacter.h"
+#include "Pawn/Component/ExperienceComponent.h"
 #include "Param_RunrunManCharacter.generated.h"
 
 /**
@@ -13,10 +14,13 @@ class RUNRUNMAN_API AParam_RunrunManCharacter : public ARunrunManCharacter
 {
 	GENERATED_BODY()
 
-public:
-	
+		UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = ExperienceComponent, meta = (AllowPrivateAccess = "true"))
+		UExperienceComponent *ExperienceComponent;
 
-		AParam_RunrunManCharacter();
+public:
+	AParam_RunrunManCharacter();
+	/*Возращаем компонент опыта*/
+	FORCEINLINE class UExperienceComponent* GetExperienceComponent() const { return ExperienceComponent; }
 	
 	
 };

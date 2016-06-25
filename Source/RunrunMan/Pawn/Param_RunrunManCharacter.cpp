@@ -6,7 +6,7 @@
 
 AParam_RunrunManCharacter::AParam_RunrunManCharacter()
 {
-	
+	ExperienceComponent = CreateDefaultSubobject<UExperienceComponent>(TEXT("ExperienceComponent"));
 }
 
 

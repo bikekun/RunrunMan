@@ -9,12 +9,43 @@ UExperienceComponent::UExperienceComponent()
 {
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
-	bWantsBeginPlay = true;
-	PrimaryComponentTick.bCanEverTick = true;
+	bWantsBeginPlay = false;
+	PrimaryComponentTick.bCanEverTick = false;
 
+	Experience = 0;
+	Level = 1;
+	MaxLevel = 10;
+	DefaultValueExperence = 500;
+	SetExperienceNextLevel();
+	
 	// ...
 }
 
+
+
+bool UExperienceComponent::CheckExperience()
+{
+	if (Experience >= ExperienceNextLevel)
+	{
+		int32 LLevel = Level;
+		SetExperienceNextLevel();
+		SetLevel(Level++);
+
+		if (LLevel != Level)	return true;
+	}
+	return false;
+}
+
+
+
+
+
+
+
+
+
+
+/*
 
 // Called when the game starts
 void UExperienceComponent::BeginPlay()
@@ -33,4 +64,4 @@ void UExperienceComponent::TickComponent( float DeltaTime, ELevelTick TickType, 
 
 	// ...
 }
-
+*/

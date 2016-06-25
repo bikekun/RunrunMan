@@ -119,6 +119,7 @@ void ARunrunManCharacter::Tick(float DeltaTime)
 //	//SetDefaultRightVector();
 //
 //}
+
 //¬ыставл€ет вектор в направление по умолчанию
 void ARunrunManCharacter::SetDefaultRightVector()
 {
