@@ -21,7 +21,8 @@ public:
 	void	ChangeHealth(float value);
 	bool	CheckHealth();
 
-	void	SetMaxHealth(float value)		{ MaxHealth = value; }
+	void	SetMaxHealth(float value) {	MaxHealth = value;	}
+	void	HealthToMax() { Health = MaxHealth; }
 	void	SetSpeedMoved(float value)		{ SpeedMoved = value; }
 	void	SetLevel()						{ LevelCharacter++; }
 	

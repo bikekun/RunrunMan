@@ -134,3 +134,10 @@ void ARunrunManCharacter::Death()
 {
 	GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Blue, TEXT("Death"), true);
 }
+
+void ARunrunManCharacter::PostInitProperties()
+{
+	Super::PostInitProperties();
+	ParametersComponent->SetMaxHealth(ParametersComponent->DefaultMaxHealth);
+	ParametersComponent->HealthToMax();
+}

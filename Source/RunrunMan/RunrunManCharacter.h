@@ -11,6 +11,7 @@ class ARunrunManCharacter : public ACharacter
 {
 	GENERATED_BODY()
 
+
 	/** Side view camera */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	class UCameraComponent* SideViewCameraComponent;
@@ -27,7 +28,7 @@ class ARunrunManCharacter : public ACharacter
 	void Death();
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = ParametersComponent, meta = (AllowPrivateAccess = "true"))
-	UParametersComponent *ParametersComponent;
+		UParametersComponent *ParametersComponent;
 
 
 	// Called every frame
@@ -37,7 +38,7 @@ class ARunrunManCharacter : public ACharacter
 	//virtual void BeginPlay() override;
 	
 	
-	
+	void PostInitProperties() override;
 
 protected:
 
@@ -67,6 +68,8 @@ public:
 
 	ARunrunManCharacter();
 
+	/*Возращаем параметры*/
+	FORCEINLINE class UParametersComponent* GetParametersComponent() const { return ParametersComponent; }
 	/** Returns SideViewCameraComponent subobject **/
 	FORCEINLINE class UCameraComponent* GetSideViewCameraComponent() const { return SideViewCameraComponent; }
 	/** Returns CameraBoom subobject **/

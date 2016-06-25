@@ -14,7 +14,7 @@ class RUNRUNMAN_API AParam_RunrunManCharacter : public ARunrunManCharacter
 	GENERATED_BODY()
 
 public:
-		
+	
 
 		AParam_RunrunManCharacter();
 	
