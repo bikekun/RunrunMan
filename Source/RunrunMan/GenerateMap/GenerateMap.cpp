@@ -116,19 +116,19 @@ void AGenerateMap::SpaceFirstLine()
 
 void AGenerateMap::SpaceFirstVar(int32 y, int32 var)
 {
-	if (ArrayMap.IsValidIndex(y + sizeY) && (y + 1 < sizeY))
+	if (ArrayMap.IsValidIndex(y + sizeY))
 	{ ArrayMap[y + sizeY] = 0; }
 
-	if (ArrayMap.IsValidIndex(y + sizeY - 1)&&((var==0)||(var==1))&&(var !=0) && (y + 1 < sizeY))
+	if (ArrayMap.IsValidIndex(y + sizeY - 1)&&((var==0)||(var==1))&&(var !=0))
 	{ ArrayMap[y + sizeY - 1] = 0; }
 
 	if (ArrayMap.IsValidIndex(y + sizeY + 1) && ((var == 0) || (var == 2)) && (y + 1 < sizeY))
 	{ ArrayMap[y + sizeY + 1] = 0; }
 
-	if (ArrayMap.IsValidIndex(y + sizeY * 2) && (y + 1 < sizeY))
+	if (ArrayMap.IsValidIndex(y + sizeY * 2))
 	{ ArrayMap[y + sizeY * 2] = 0; }
 
-	if (ArrayMap.IsValidIndex(y + sizeY * 2 - 1) && ((var == 0) || (var == 1)) && (y + 1 < sizeY))
+	if (ArrayMap.IsValidIndex(y + sizeY * 2 - 1) && ((var == 0) || (var == 1)))
 	{ ArrayMap[y + sizeY * 2 - 1] = 0; }
 
 	if (ArrayMap.IsValidIndex(y + sizeY * 2 + 1) && ((var == 0) || (var == 2)) && (y + 1 < sizeY))
