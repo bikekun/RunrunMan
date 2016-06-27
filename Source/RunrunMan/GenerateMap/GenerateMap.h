@@ -5,6 +5,8 @@
 #include "GameFramework/Actor.h"
 #include "GenerateMap.generated.h"
 
+const int32 RandomRangeValue = 3;
+
 UCLASS()
 class RUNRUNMAN_API AGenerateMap : public AActor
 {
@@ -21,7 +23,27 @@ public:
 	virtual void Tick( float DeltaSeconds ) override;
 
 	void GenerateMatrixMap();
-	int32 ArrayMap[10][10];
 
+	/*Размер динамического массива*/
+	UPROPERTY(EditAnywhere, Category = GenerateMap)
+	int32 sizeX;
+	UPROPERTY(EditAnywhere, Category = GenerateMap)
+	int32 sizeY;
+
+	/*Динамический массив карты*/
+	TArray <int32> ArrayMap;
+
+	UPROPERTY(EditAnywhere, Category = GenerateMap)
+	int32 LevelMap = 1;
+
+	
+
+private:
+	void ClearArrayMap();
+	void InitilizedArrayMap();
+
+	void SpaceFirstLine();
+
+	void SpaceFirstVar(int32 y, int32 var);
 	
 };

@@ -32,7 +32,7 @@ public:
 
 	UExperienceComponent();
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = ParametersComponent)
-		int32 MaxLevel;
+	int32 MaxLevel;
 
 	float GetExperience() { return Experience; }
 	float GetExperienceNextLevel() { return ExperienceNextLevel; }
