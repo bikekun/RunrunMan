@@ -3,6 +3,7 @@
 #pragma once
 
 #include "GameFramework/Actor.h"
+#include "GenerateMapConstant.h"
 #include "GenerateMap.generated.h"
 
 const int32 RandomRangeValue = 3;
@@ -31,7 +32,7 @@ public:
 	int32 sizeY;
 
 	/*Динамический массив карты*/
-	TArray <int32> ArrayMap;
+	TArray <char> ArrayMap;
 
 	UPROPERTY(EditAnywhere, Category = GenerateMap)
 	int32 LevelMap = 1;
@@ -42,8 +43,12 @@ private:
 	void ClearArrayMap();
 	void InitilizedArrayMap();
 
-	void SpaceFirstLine();
 
+
+	bool CheckEraseFirstLine(int MapIndex);
+	void SpaceFirstLine();
 	void SpaceFirstVar(int32 y, int32 var);
-	
+	bool CheckSpawnObject(int MapIndex, const sSpawnObject object, bool CollisionLine);
+	void SpawnObjectSelectLine(int Replay, const sSpawnObject object, int StartLine, bool CollisionLine);
+	void SpawnObjectFirstLine(int Replay, const sSpawnObject object, bool CollisionLine);
 };
